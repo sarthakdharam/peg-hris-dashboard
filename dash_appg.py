@@ -42,15 +42,33 @@ SUBTEXT = "#94A3B8"
 # LOGO
 # =========================================================
 
-logo_path = "/home/sarthak/Desktop/ANNA work/logo.png"
+import sys
 
-encoded_logo = ""
+if getattr(sys,'frozen',False):
+
+    BASE_DIR=sys._MEIPASS
+
+else:
+
+    BASE_DIR=os.path.dirname(
+        os.path.abspath(__file__)
+    )
+
+logo_path=os.path.join(
+    BASE_DIR,
+    "logo.png"
+)
+
+encoded_logo=""
 
 if os.path.exists(logo_path):
 
-    with open(logo_path, "rb") as image_file:
+    with open(
+        logo_path,
+        "rb"
+    ) as image_file:
 
-        encoded_logo = base64.b64encode(
+        encoded_logo=base64.b64encode(
 
             image_file.read()
 
@@ -2133,6 +2151,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     app.run(
-        debug=False,
-        port=8054
+        host="0.0.0.0",
+        port=8054,
+        debug=False
     )
